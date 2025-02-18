@@ -25,13 +25,13 @@ Route::prefix('customer')->name('customer.')->group(function () {
         Route::post('register', [CustomerRegisteredUserController::class, 'store']);
 
         Route::get('login', [CustomerAuthenticatedSessionController::class, 'create'])->name('login');
-        Route::post('login', [CustomerAuthenticatedSessionController::class, 'storeCustomer']);
+        Route::post('login', [CustomerAuthenticatedSessionController::class, 'store']); // Using store method here
 
         Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
-        Route::post('forgot-password', [PasswordResetLinkController::class, 'storeCustomer'])->name('password.email');
+        Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email'); // Fixed method name
 
         Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
-        Route::post('reset-password', [NewPasswordController::class, 'storeCustomer'])->name('password.store');
+        Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store'); // Fixed method name
     });
 
     Route::middleware('auth:customer')->group(function () {
@@ -47,7 +47,7 @@ Route::prefix('customer')->name('customer.')->group(function () {
         Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
         Route::put('password', [PasswordController::class, 'update'])->name('password.update');
-        Route::post('logout', [CustomerAuthenticatedSessionController::class, 'destroyCustomer'])->name('logout');
+        Route::post('logout', [CustomerAuthenticatedSessionController::class, 'destroy'])->name('logout'); // Fixed method name
     });
 });
 
@@ -62,13 +62,13 @@ Route::prefix('employee')->name('employee.')->group(function () {
         Route::post('register', [EmployeeRegisteredUserController::class, 'store']);
 
         Route::get('login', [EmployeeAuthenticatedSessionController::class, 'create'])->name('login');
-        Route::post('login', [EmployeeAuthenticatedSessionController::class, 'storeEmployee']);
+        Route::post('login', [EmployeeAuthenticatedSessionController::class, 'store']); // Using store method here
 
         Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
-        Route::post('forgot-password', [PasswordResetLinkController::class, 'storeEmployee'])->name('password.email');
+        Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email'); // Fixed method name
 
         Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
-        Route::post('reset-password', [NewPasswordController::class, 'storeEmployee'])->name('password.store');
+        Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store'); // Fixed method name
     });
 
     Route::middleware('auth:employee')->group(function () {
@@ -84,6 +84,6 @@ Route::prefix('employee')->name('employee.')->group(function () {
         Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
         Route::put('password', [PasswordController::class, 'update'])->name('password.update');
-        Route::post('logout', [EmployeeAuthenticatedSessionController::class, 'destroyEmployee'])->name('logout');
+        Route::post('logout', [EmployeeAuthenticatedSessionController::class, 'destroy'])->name('logout'); // Fixed method name
     });
 });
