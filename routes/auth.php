@@ -34,15 +34,16 @@ Route::prefix('customer')->name('customer.')->group(function () {
         Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store'); // Fixed method name
     });
 
-    Route::middleware('auth:customer')->group(function () {
-        Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
+   Route::middleware('auth:customer')->group(function () {
+      
+    /*   Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
         Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
             ->middleware(['signed', 'throttle:6,1'])
             ->name('verification.verify');
         Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
             ->middleware('throttle:6,1')
             ->name('verification.send');
-
+      */
         Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
         Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
@@ -50,6 +51,7 @@ Route::prefix('customer')->name('customer.')->group(function () {
         Route::post('logout', [CustomerAuthenticatedSessionController::class, 'destroy'])->name('logout'); // Fixed method name
     });
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -71,7 +73,7 @@ Route::prefix('employee')->name('employee.')->group(function () {
         Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store'); // Fixed method name
     });
 
-    Route::middleware('auth:employee')->group(function () {
+   /* Route::middleware('auth:employee')->group(function () {
         Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
         Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
             ->middleware(['signed', 'throttle:6,1'])
@@ -79,11 +81,10 @@ Route::prefix('employee')->name('employee.')->group(function () {
         Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
             ->middleware('throttle:6,1')
             ->name('verification.send');
-
+   */
         Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
         Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
         Route::put('password', [PasswordController::class, 'update'])->name('password.update');
         Route::post('logout', [EmployeeAuthenticatedSessionController::class, 'destroy'])->name('logout'); // Fixed method name
     });
-});

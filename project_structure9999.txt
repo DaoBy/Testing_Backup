@@ -1,0 +1,220 @@
+.
+├── app
+│   ├── Http
+│   │   ├── Controllers
+│   │   │   ├── Auth
+│   │   │   │   ├── AuthenticatedSessionController.php
+│   │   │   │   ├── ConfirmablePasswordController.php
+│   │   │   │   ├── CustomerAuthenticatedSessionController.php
+│   │   │   │   ├── CustomerHomeController.php
+│   │   │   │   ├── CustomerRegisteredUserController.php
+│   │   │   │   ├── EmailVerificationNotificationController.php
+│   │   │   │   ├── EmailVerificationPromptController.php
+│   │   │   │   ├── EmployeeAuthenticatedSessionController.php
+│   │   │   │   ├── EmployeeRegisteredUserController.php
+│   │   │   │   ├── NewPasswordController.php
+│   │   │   │   ├── PasswordController.php
+│   │   │   │   ├── PasswordResetLinkController.php
+│   │   │   │   ├── RegisteredUserController.php
+│   │   │   │   └── VerifyEmailController.php
+│   │   │   ├── Controller.php
+│   │   │   ├── DashboardController.php
+│   │   │   └── ProfileController.php
+│   │   ├── Kernel.php
+│   │   ├── Middleware
+│   │   │   ├── CustomerAuthMiddleware.php
+│   │   │   ├── EmployeeAuthMiddleware.php
+│   │   │   ├── HandleInertiaRequests.php
+│   │   │   └── RoleMiddleware.php
+│   │   └── Requests
+│   │       ├── Auth
+│   │       │   └── LoginRequest.php
+│   │       └── ProfileUpdateRequest.php
+│   ├── Models
+│   │   ├── Customer.php
+│   │   ├── Employee.php
+│   │   └── User.php
+│   └── Providers
+│       └── AppServiceProvider.php
+├── artisan
+├── bootstrap
+│   ├── app.php
+│   ├── cache
+│   │   ├── events.php
+│   │   ├── packages.php
+│   │   └── services.php
+│   └── providers.php
+├── composer.json
+├── composer.lock
+├── config
+│   ├── app.php
+│   ├── auth.php
+│   ├── cache.php
+│   ├── database.php
+│   ├── filesystems.php
+│   ├── logging.php
+│   ├── mail.php
+│   ├── queue.php
+│   ├── services.php
+│   └── session.php
+├── database
+│   ├── database.sqlite
+│   ├── factories
+│   │   └── UserFactory.php
+│   ├── migrations
+│   │   ├── 0001_01_01_000000_create_users_table.php
+│   │   ├── 0001_01_01_000001_create_cache_table.php
+│   │   ├── 0001_01_01_000002_create_jobs_table.php
+│   │   ├── 2025_02_17_103643_create_customers_table.php
+│   │   └── 2025_02_17_103651_create_employees_table.php
+│   └── seeders
+│       └── DatabaseSeeder.php
+├── jsconfig.json
+├── package.json
+├── package-lock.json
+├── phpunit.xml
+├── postcss.config.js
+├── project_structur23.txt
+├── project_structure211111.txt
+├── project_structure21133.txt
+├── project_structure211565.txt
+├── project_structure21167.txt
+├── project_structure211.txt
+├── project_structure2.txt
+├── project_structure9999.txt
+├── public
+│   ├── build
+│   │   ├── assets
+│   │   │   ├── app-DIdvcy_9.js
+│   │   │   ├── app-DSP5uMwR.css
+│   │   │   ├── ApplicationLogo-B4XS6O1K.js
+│   │   │   ├── AuthenticatedLayout----hv2Jd.js
+│   │   │   ├── ConfirmPassword-BfNzjxCH.js
+│   │   │   ├── Dashboard-B6r5-lVZ.js
+│   │   │   ├── DeleteUserForm-CvG1lSPF.js
+│   │   │   ├── Edit-DI9LbckB.js
+│   │   │   ├── ForgotPassword-DqUykrqy.js
+│   │   │   ├── GuestLayout-BURzVN2h.js
+│   │   │   ├── Login-BqgDMtIC.js
+│   │   │   ├── _plugin-vue_export-helper-DlAUqK2U.js
+│   │   │   ├── PrimaryButton-BbT-Z86N.js
+│   │   │   ├── Register-DLMszVv2.js
+│   │   │   ├── ResetPassword-DTpMq_IZ.js
+│   │   │   ├── TextInput-hT-yI2oB.js
+│   │   │   ├── UpdatePasswordForm-CvmWBE9F.js
+│   │   │   ├── UpdateProfileInformationForm-BAGVURjJ.js
+│   │   │   ├── VerifyEmail-CeYbETBr.js
+│   │   │   └── Welcome-DWdcLXyI.js
+│   │   └── manifest.json
+│   ├── favicon.ico
+│   ├── hot
+│   ├── index.php
+│   └── robots.txt
+├── README.md
+├── resources
+│   ├── css
+│   │   └── app.css
+│   ├── js
+│   │   ├── app.js
+│   │   ├── bootstrap.js
+│   │   ├── Components
+│   │   │   ├── ApplicationLogo.vue
+│   │   │   ├── Checkbox.vue
+│   │   │   ├── DangerButton.vue
+│   │   │   ├── DropdownLink.vue
+│   │   │   ├── Dropdown.vue
+│   │   │   ├── InputError.vue
+│   │   │   ├── InputLabel.vue
+│   │   │   ├── Modal.vue
+│   │   │   ├── NavLink.vue
+│   │   │   ├── PrimaryButton.vue
+│   │   │   ├── ResponsiveNavLink.vue
+│   │   │   ├── SecondaryButton.vue
+│   │   │   └── TextInput.vue
+│   │   ├── Layouts
+│   │   │   ├── AuthenticatedLayout.vue
+│   │   │   └── GuestLayout.vue
+│   │   ├── Pages
+│   │   │   ├── Admin
+│   │   │   │   └── AdminDashboard.vue
+│   │   │   ├── Auth
+│   │   │   │   ├── ConfirmPassword.vue
+│   │   │   │   ├── CustomerLogin.vue
+│   │   │   │   ├── CustomerRegister.vue
+│   │   │   │   ├── EmployeeLogin.vue
+│   │   │   │   ├── EmployeeRegister.vue
+│   │   │   │   ├── ForgotPassword.vue
+│   │   │   │   ├── Login.vue
+│   │   │   │   ├── Register.vue
+│   │   │   │   ├── ResetPassword.vue
+│   │   │   │   └── VerifyEmail.vue
+│   │   │   ├── Collector
+│   │   │   │   └── CollectorDashboard.vue
+│   │   │   ├── Dashboard.vue
+│   │   │   ├── Driver
+│   │   │   │   └── DriverDashboard.vue
+│   │   │   ├── Home.vue
+│   │   │   ├── Profile
+│   │   │   │   ├── Edit.vue
+│   │   │   │   └── Partials
+│   │   │   │       ├── DeleteUserForm.vue
+│   │   │   │       ├── UpdatePasswordForm.vue
+│   │   │   │       └── UpdateProfileInformationForm.vue
+│   │   │   ├── Staff
+│   │   │   │   └── StaffDashboard.vue
+│   │   │   └── Welcome.vue
+│   │   └── ziggy.js
+│   └── views
+│       └── app.blade.php
+├── routes
+│   ├── auth.php
+│   ├── console.php
+│   └── web.php
+├── storage
+│   ├── app
+│   │   ├── private
+│   │   └── public
+│   ├── framework
+│   │   ├── cache
+│   │   │   └── data
+│   │   ├── sessions
+│   │   ├── testing
+│   │   └── views
+│   │       ├── 0ceeaf0bd9b6ef82b793cf49f7da8a7a.php
+│   │       ├── 20287f6b92e5e26db8a368dc0f70bf79.php
+│   │       ├── 237b5b96ac741a01d1104a631686754b.php
+│   │       ├── 33731311937e4ed5dd35b91ad1ce5202.php
+│   │       ├── 48e635acde65d7a5c49df78ceb95c5b8.php
+│   │       ├── 4d89eba9129ed20f12b891fe42de14ee.php
+│   │       ├── 500f74173d6eb0fbac2356cd380b58a1.php
+│   │       ├── 592565b8a8fa47845c24288f93ce60c9.php
+│   │       ├── 779a0d363eb69320fd443e8d9bb46ac8.php
+│   │       ├── 7cb246cbd8786598c14ebdb9476946ae.php
+│   │       ├── 836a65c7b9c2bc5fc430dac02262c598.php
+│   │       ├── 8b8f9033cd3030479e0f2d723ca54fc3.php
+│   │       ├── 91dffd7728dbbae0914e461c375409d5.php
+│   │       ├── cb78930996e26b0f8352a9853c48fa4f.php
+│   │       ├── d79dacd5bb514a18933a6ab766ad8183.php
+│   │       ├── eb9550059d90d337b569f5e75075ba1a.php
+│   │       ├── f0cf34b71633ca91a42247f1613c5ebf.php
+│   │       └── f5ca7d41df8f715a6987ebdb140d21c6.php
+│   └── logs
+│       └── laravel.log
+├── tailwind.config.js
+├── tests
+│   ├── Feature
+│   │   ├── Auth
+│   │   │   ├── AuthenticationTest.php
+│   │   │   ├── EmailVerificationTest.php
+│   │   │   ├── PasswordConfirmationTest.php
+│   │   │   ├── PasswordResetTest.php
+│   │   │   ├── PasswordUpdateTest.php
+│   │   │   └── RegistrationTest.php
+│   │   ├── ExampleTest.php
+│   │   └── ProfileTest.php
+│   ├── TestCase.php
+│   └── Unit
+│       └── ExampleTest.php
+└── vite.config.js
+
+50 directories, 168 files

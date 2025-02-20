@@ -43,7 +43,7 @@ class EmployeeRegisteredUserController extends Controller
             'remember_token' => \Str::random(60), // Ensure session security
         ]);
 
-        event(new Registered($employee));
+        //event(new Registered($employee));
 
         // Use the correct authentication guard
         Auth::guard('employee')->login($employee);

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Str;
 
 class CustomerRegisteredUserController extends Controller
 {
@@ -38,14 +39,15 @@ class CustomerRegisteredUserController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'remember_token' => \Str::random(60), // Ensure session security
+            'remember_token' => Str::random(60), // Ensure session security
         ]);
 
-        event(new Registered($customer));
+       // event(new Registered($customer));
 
         // Use the correct authentication guard
         Auth::guard('customer')->login($customer);
 
-        return redirect()->intended(route('customer.dashboard'));
+        // Redirect to the customer home page
+        return redirect()->intended(route('customer.home'));
     }
 }

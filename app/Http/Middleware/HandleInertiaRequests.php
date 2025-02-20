@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -19,7 +20,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function version(Request $request): ?string
     {
-        return parent::version($request);
+        return null; // Avoid calling parent if it doesn't exist
     }
 
     /**
@@ -28,13 +29,14 @@ class HandleInertiaRequests extends Middleware
      * @return array<string, mixed>
      */
     public function share(Request $request): array
-{
-    return [
-        ...parent::share($request),
-        'auth' => [
-            'user' => $request->user(),
-            'isEmployee' => $request->user() ? $request->user()->is_employee : false, // Add user type to share
-        ],
-    ];
-}
+    {
+        return array_merge(parent::share($request) ?? [], [  // Ensure `parent::share()` exists
+            'auth' => [
+                'user' => $request->user(),
+                'isEmployee' => Auth::guard('employee')->check(), 
+                'isCustomer' => Auth::guard('customer')->check(), 
+                'role' => Auth::guard('employee')->check() ? Auth::guard('employee')->user()->role : null,
+            ],
+        ]);
+    }
 }

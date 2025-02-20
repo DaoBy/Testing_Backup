@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Auth\CustomerHomeController;
 use App\Http\Controllers\Auth\CustomerAuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmployeeAuthenticatedSessionController;
 use App\Http\Controllers\DashboardController;
@@ -11,71 +12,94 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
+        'canCustomerLogin' => Route::has('customer.login'),
+        'canEmployeeLogin' => Route::has('employee.login'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Profile Routes
+//Tracking
+Route::get('/tracking', function () {
+    return Inertia::render('Tracking');
+})->name('tracking');
+
+//Delivery Request
+Route::get('/request', function () {
+    return Inertia::render('RequestDelivery');
+})->name('request.delivery');
+
+
+// ✅ Default login route (Redirects to customer login)
+Route::get('/login', function () {
+    return redirect()->route('customer.login');
+})->name('login');
+
+// ✅ Public Customer Home Page
+Route::get('/customer/home', function () {
+    return Inertia::render('Home');
+})->name('customer.home');
+
+
+// ✅ Customer Authentication Routes
+Route::prefix('customer')->name('customer.')->group(function () {
+    Route::middleware('guest:customer')->group(function () {
+        Route::get('register', [CustomerRegisteredUserController::class, 'create'])->name('register');
+        Route::post('register', [CustomerRegisteredUserController::class, 'store'])->name('register.store');
+
+        Route::get('login', [CustomerAuthenticatedSessionController::class, 'create'])->name('login');
+        Route::post('login', [CustomerAuthenticatedSessionController::class, 'store']);
+    });
+
+    Route::middleware('auth:customer')->group(function () {
+        Route::post('logout', [CustomerAuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+        Route::get('dashboard', function () {
+            return Inertia::render('Customer/Dashboard');
+        })->name('dashboard');
+    });
+});
+
+
+// ✅ Employee Authentication Routes
+Route::prefix('employee')->name('employee.')->group(function () {
+    Route::middleware('guest:employee')->group(function () {
+        Route::get('register', [EmployeeRegisteredUserController::class, 'create'])->name('register');
+        Route::post('register', [EmployeeRegisteredUserController::class, 'store'])->name('register.store');
+
+        Route::get('login', [EmployeeAuthenticatedSessionController::class, 'create'])->name('login');
+        Route::post('login', [EmployeeAuthenticatedSessionController::class, 'store']);
+    });
+
+    Route::middleware('auth:employee')->group(function () {
+        Route::post('logout', [EmployeeAuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+        // ✅ Employee Dashboards Based on Role
+        Route::middleware('role:admin')->get('/admin/dashboard', function () {
+            return Inertia::render('Employee/AdminDashboard');
+        })->name('admin.dashboard');
+
+        Route::middleware('role:staff')->get('/staff/dashboard', function () {
+            return Inertia::render('Employee/StaffDashboard');
+        })->name('staff.dashboard');
+
+        Route::middleware('role:driver')->get('/driver/dashboard', function () {
+            return Inertia::render('Employee/DriverDashboard');
+        })->name('driver.dashboard');
+
+        Route::middleware('role:collector')->get('/collector/dashboard', function () {
+            return Inertia::render('Employee/CollectorDashboard');
+        })->name('collector.dashboard');
+    });
+});
+
+// ✅ General Profile Routes (For both customers & employees)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Customer Routes
-Route::get('/register/customer', [CustomerRegisteredUserController::class, 'create'])->name('customer.register');
-Route::post('/register/customer', [CustomerRegisteredUserController::class, 'store'])->name('customer.register.store');
-
-// Employee Routes
-Route::get('/register/employee', [EmployeeRegisteredUserController::class, 'create'])->name('employee.register');
-Route::post('/register/employee', [EmployeeRegisteredUserController::class, 'store'])->name('employee.register.store');
-
-
-
-// Customer Login Routes
-Route::get('/login/customer', [CustomerAuthenticatedSessionController::class, 'create'])->name('customer.login');
-Route::post('/login/customer', [CustomerAuthenticatedSessionController::class, 'store']);
-Route::post('/logout/customer', [CustomerAuthenticatedSessionController::class, 'destroy'])->name('customer.logout');
-
-// Employee Login Routes
-Route::get('/login/employee', [EmployeeAuthenticatedSessionController::class, 'create'])->name('employee.login');
-Route::post('/login/employee', [EmployeeAuthenticatedSessionController::class, 'store']);
-Route::post('/logout/employee', [EmployeeAuthenticatedSessionController::class, 'destroy'])->name('employee.logout');
-
-
-
-// Customer Dashboard (Protected)
-Route::middleware(['auth:customer'])->group(function () {
-    Route::get('/customer/dashboard', function () {
-        return Inertia::render('Customer/Dashboard');
-    })->name('customer.dashboard');
-});
-
-// Employee Dashboards Based on Role
-Route::middleware(['auth:employee'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return Inertia::render('Employee/AdminDashboard');
-    })->middleware('role:admin')->name('admin.dashboard');
-
-    Route::get('/staff/dashboard', function () {
-        return Inertia::render('Employee/StaffDashboard');
-    })->middleware('role:staff')->name('staff.dashboard');
-
-    Route::get('/driver/dashboard', function () {
-        return Inertia::render('Employee/DriverDashboard');
-    })->middleware('role:driver')->name('driver.dashboard');
-
-    Route::get('/collector/dashboard', function () {
-        return Inertia::render('Employee/CollectorDashboard');
-    })->middleware('role:collector')->name('collector.dashboard');
-});
-
-// Include auth routes
+// ✅ Include other authentication routes
 require __DIR__.'/auth.php';

@@ -1,30 +1,30 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import { Link } from '@inertiajs/vue3';
+import NavBar from '@/Components/NavBar.vue';
 import { usePage } from '@inertiajs/vue3';
 
+// Get current page
 const page = usePage();
-const isEmployee = page.url.startsWith('/register/employee') || page.url.startsWith('/login/employee');
-const loginRoute = isEmployee ? 'employee.login' : 'customer.login';
+
+// Determine login route based on user type
 </script>
 
 <template>
-    <div class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
-        <div>
-            <Link href="/">
-                <ApplicationLogo class="h-20 w-20 fill-current text-gray-500" />
-            </Link>
-        </div>
+    <div class="min-h-screen bg-gray-100 flex flex-col">
+        <!-- Navigation Bar -->
+        <NavBar />
 
-        <div class="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
+        <!-- Main Content -->
+        <main class="flex-1 w-full">
             <slot />
-        </div>
+        </main>
 
-        <!-- Example: Add a login button dynamically -->
-        <div class="mt-4">
-            <Link :href="route(loginRoute)" class="text-blue-500 hover:underline">
-                Login
-            </Link>
-        </div>
+        <!-- Footer (Optional) -->
+        <footer class="text-center py-4 text-gray-600 bg-white border-t mt-8">
+            © {{ new Date().getFullYear() }} Logistics Company. All Rights Reserved.
+        </footer>
     </div>
 </template>
+
+
+
+
