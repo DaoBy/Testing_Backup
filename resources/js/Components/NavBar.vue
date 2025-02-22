@@ -23,7 +23,7 @@ const toggleMobileMenu = () => {
   <nav class="bg-white shadow-md w-full">
     <div class="w-full max-w-[90%] xl:max-w-[1280px] mx-auto flex justify-between items-center px-6 lg:px-12 py-4">
       <!-- Logo -->
-      <a href="/" class="text-2xl font-bold">🚚 Logistics</a>
+      <a href="/" class="text-2xl font-bold">🚚 Infinitrix</a>
 
       <!-- Desktop Navigation -->
       <div class="hidden md:flex space-x-8">

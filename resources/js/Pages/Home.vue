@@ -40,16 +40,16 @@ const authUser = computed(() => usePage().props.auth.user);
           <!-- Features Grid -->
           <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="p-6 bg-gray-100 rounded-lg shadow-sm text-center">
-              <h3 class="text-xl font-semibold text-gray-900">📦 Secure Deliveries</h3>
+              <h3 class="text-xl font-semibold text-gray-900">🍑 Gyat Deliveries</h3>
               <p class="mt-2 text-gray-600">Your packages are safe with us.</p>
             </div>
             <div class="p-6 bg-gray-100 rounded-lg shadow-sm text-center">
-              <h3 class="text-xl font-semibold text-gray-900">⏱️ On-Time Shipments</h3>
+              <h3 class="text-xl font-semibold text-gray-900">⏱️ Skibidi On-Time Shipments</h3>
               <p class="mt-2 text-gray-600">We ensure your deliveries arrive on time.</p>
             </div>
             <div class="p-6 bg-gray-100 rounded-lg shadow-sm text-center">
-              <h3 class="text-xl font-semibold text-gray-900">🌍 Nationwide Coverage</h3>
-              <p class="mt-2 text-gray-600">We deliver across the country.</p>
+              <h3 class="text-xl font-semibold text-gray-900">ඞ Amongus</h3>
+              <p class="mt-2 text-gray-600">We vent your packages</p>
             </div>
           </div>
         </div>
